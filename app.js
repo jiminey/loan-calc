@@ -113,7 +113,9 @@ exports.totalPayment = function(args) {
   );
   const termsInMonths = args.term * 12;
 
-  const totalPayment = monthlyPayment * termsInMonths;
+  let totalPayment = monthlyPayment * termsInMonths;
 
+  totalPayment = Math.round(totalPayment * 100) / 100;
+  
   return totalPayment;
 };

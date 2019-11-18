@@ -14,8 +14,8 @@ exports["A $100,000 loan , with 5.5% interest rate, $20,000 down payment, and 30
   test.done();
 };
 
-//Test for correct monthly total interest paid
-exports["A $100,000 loan , with 5.5% interest rate, $20,000 down payment, and 30 year term should have a total intest of $83523.23"] = function(test) {
+//Test for correct total interest paid
+exports["A $100,000 loan , with 5.5% interest rate, $20,000 down payment, and 30 year term should have a total interest of $83523.23"] = function(test) {
   test.equal(
     LoanCalc.totalInterest({
       amount: 100000,
@@ -24,6 +24,20 @@ exports["A $100,000 loan , with 5.5% interest rate, $20,000 down payment, and 30
       term: 30
     }),
     83523.23
+  );
+  test.done();
+};
+
+//Test for correct total payment
+exports["A $100,000 loan , with 5.5% interest rate, $20,000 down payment, and 30 year term should have a total payment of $163523.23"] = function(test) {
+  test.equal(
+    LoanCalc.totalPayment({
+      amount: 100000,
+      interest: 5.5,
+      downpayment: 20000,
+      term: 30
+    }),
+    163523.23
   );
   test.done();
 };
