@@ -1,11 +1,9 @@
 'use strict'
 
 
-const monthlyPaymentCalc = function (loanAmount, interestRate, downPayment, loanTermInYears) {
-
+ function monthlyPaymentCalc(loanAmount, interestRate, downPayment, loanTermInYears) {
     const monthlyInterestRate;
 
-    //calculate monthly interest rate
     //conditional to determine interest rate in percentage or decimal
     if (parseInt(interestRate) === 0) {
         monthlyInterestRate  = interestRate / 12 
@@ -17,18 +15,22 @@ const monthlyPaymentCalc = function (loanAmount, interestRate, downPayment, loan
     const monthlyTerm = loanTermInYears * 12; 
 
     //calculate the monthly payment
-    //monthlyPAyment = principal * ( monthlyInterest / (1 - (1 + monthlyInterest)^ -months))
+    //monthlyPayment = (loan amount - down payment) * ( monthlyInterest / (1 - (1 + monthlyInterest)^ -months))
     return (loanAmount - downPayment) * (monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -(monthlyTerm))));
 };
 
 
-var errorChecks = function (args) {
+function errorChecks(args) {
     //case for when written in "$140,000" dollar-sign/comma format
     if (isNaN(args.amount)) {
         args.amount = parseFloat(args.amount.replace(/[^0-9\.]+/g, ''));
     }
+    
+    if (isNaN(args.downpayment)){
+        args.downpayment = parseFloat(args.downpayment.replace(/[^0-9\.]+/g, ''))
+    }
 
-    // throw errors for strings and unsupported numerical valuess
+    // throw errors for anything but a positive number
     if (typeof args.amount === 'undefined' || isNaN(parseFloat(args.amount)) || args.amount <= 0) {
         throw new Error('The loan amount you entered was invalid. Please specify a positive loan amount.');
     }
@@ -55,27 +57,39 @@ var errorChecks = function (args) {
 
 //takes in an object with amount, interest, downpayment, term as keys
 
-exports.monthlyPaymentCalc = function (args) {
-
+exports.monthlyPaymentCalc = function(args) {
     args = errorChecks(args);
 
     // calculate monthly payment
     const monthlyPayment = monthlyPaymentCalc(args.amount, args.interest, args.downpayment, args.term);
 
     // round the payment to two decimal places
-    return roundNum(monthlyPayment);
+    monthlyPayment = Math.round(num * 100) / 100
+
+    return monthlyPayment;
 };
 
-exports.totalInterest = function (args) {
-
+exports.totalInterest = function(args) {
     args = errorChecks(args);
 
-    // calculate the monthly payment
-    var monthlyPayment = paymentCalc(args.amount, args.interest, args.downpayment, args.term);
+    //calculate monthly payment
+    const monthlyPayment = monthlyPaymentCalc(args.amount, args.interest, args.downpayment, args.term);
 
-    // subtract the original loan amount from the total amount paid to get the raw interest paid
-    var rawInterest = (monthlyPayment * args.termMonths) - args.amount;
-
+    const termsInMonths = args.term * 12
+    //total interest is remainded of total amount paid subtract by total amount originally owed
+    const totalInterest = (monthlyPayment * termsInMonths) - (args.amount - args.downpayment);
+    
+    totalInterest = Math.round(totalInterest * 100) / 100
     // round the value to two decimal places
-    return roundNum(rawInterest);
+    return totalInterest;
 };
+
+exports.totalPayment = function(args) {
+    args = errorChecks(args);
+    const monthlyPayment = monthlyPaymentCalc(args.amount, args.interest, args.downpayment, args.term);
+    const termsInMonths = args.term * 12
+
+    const totalPayment = monthlyPayment * termsInMonths
+
+    return totalPayment;
+}
