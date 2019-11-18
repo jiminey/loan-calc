@@ -21,6 +21,32 @@ function monthlyPaymentCalc(loanAmount, interestRate,downPayment,loanTermInYears
 }
  
 function errorChecks(args) {
+    const keys = Object.keys(args);
+    for (let i = 0; i < keys.length; i++) {
+        switch (i) {
+            case 0 :
+                if (keys[i].toLowerCase().replace(/\s/g,"" === 'amount')){
+                    args.argument = args[keys[i]] 
+                }
+                break;
+            case 1 :
+                if (keys[i].toLowerCase().replace(/\s/g,"" === 'interest')){
+                    args.interest = args[keys[i]] 
+                }
+                break;
+            case 2 :
+                if (keys[i].toLowerCase().replace(/\s/g,"" === 'downpayment')){
+                    args.downpayment = args[keys[i]] 
+                }
+                break;
+            case 1 :
+                if (keys[i].toLowerCase().replace(/\s/g,"" === 'term')){
+                    args.term = args[keys[i]] 
+                }
+                break;
+        }
+    }
+
   //case for when written in "$140,000" dollar-sign/comma format
   if (isNaN(args.amount)) {
     args.amount = parseFloat(args.amount.replace(/[^0-9\.]+/g, ""));
