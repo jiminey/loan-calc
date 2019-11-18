@@ -1,5 +1,5 @@
 # Loan Calculator 
-made by Jimmy Nguyen
+Made by Jimmy Nguyen
 
 Check out my portfolio: jimmynguyen.dev
 
@@ -11,7 +11,8 @@ Check out my portfolio: jimmynguyen.dev
 
 **npm install**
 
-Input your data in .txt file. Follow format in the file. (Note: if you use your own file, change pathway in in loancalc.js)
+**Input your data in .txt file. Follow format in the file.**
+(Note: if you use your own file, change pathway in loancalc.js)**
 
 **node loanclac.js**
 
