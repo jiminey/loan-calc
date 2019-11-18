@@ -25,22 +25,22 @@ function errorChecks(args) {
     for (let i = 0; i < keys.length; i++) {
         switch (i) {
             case 0 :
-                if (keys[i].toLowerCase().replace(/\s/g,"" === 'amount')){
-                    args.argument = args[keys[i]] 
+                if (keys[i].toLowerCase().replace(/\s+/g,"") === 'amount'){
+                    args.amount = args[keys[i]] 
                 }
                 break;
             case 1 :
-                if (keys[i].toLowerCase().replace(/\s/g,"" === 'interest')){
+                if (keys[i].toLowerCase().replace(/\s+/g,"") === 'interest'){
                     args.interest = args[keys[i]] 
                 }
                 break;
             case 2 :
-                if (keys[i].toLowerCase().replace(/\s/g,"" === 'downpayment')){
+                if (keys[i].toLowerCase().replace(/\s+/g,"") === 'downpayment'){
                     args.downpayment = args[keys[i]] 
                 }
                 break;
             case 1 :
-                if (keys[i].toLowerCase().replace(/\s/g,"" === 'term')){
+                if (keys[i].toLowerCase().replace(/\s+/g,"") === 'term'){
                     args.term = args[keys[i]] 
                 }
                 break;
