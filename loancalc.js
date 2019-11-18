@@ -3,51 +3,53 @@
 function monthlyPaymentCalc(loanAmount, interestRate,downPayment,loanTermInYears) {
   let monthlyInterestRate;
 
-  //conditional to determine interest rate in percentage or decimal
+  //Conditional to determine if interest rate is in percentage or decimal form
   if (parseInt(interestRate) === 0) {
     monthlyInterestRate = interestRate / 12;
   } else {
     monthlyInterestRate = interestRate / 100 / 12;
   }
 
-  //convert terms into months
+  //Convert terms in years into months
   const monthlyTerm = loanTermInYears * 12;
 
-  //calculate the monthly payment
-  //monthlyPayment = ((loan amount - down payment) *  monthlyInterest) / (1 - (1 + monthlyInterest)^ -months))
+  //Calculate the monthly payment
+  //monthly payment = ((loan amount - down payment) *  monthly interest rate) / (1 - (1 + monthly interest rate)^ -months))
   return (
     ((loanAmount - downPayment) * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -monthlyTerm))
   );
 }
  
 function errorChecks(args) {
-    const keys = Object.keys(args);
-    for (let i = 0; i < keys.length; i++) {
-        switch (i) {
-            case 0 :
-                if (keys[i].toLowerCase().replace(/\s+/g,"") === 'amount'){
-                    args.amount = args[keys[i]] 
-                }
-                break;
-            case 1 :
-                if (keys[i].toLowerCase().replace(/\s+/g,"") === 'interest'){
-                    args.interest = args[keys[i]] 
-                }
-                break;
-            case 2 :
-                if (keys[i].toLowerCase().replace(/\s+/g,"") === 'downpayment'){
-                    args.downpayment = args[keys[i]] 
-                }
-                break;
-            case 1 :
-                if (keys[i].toLowerCase().replace(/\s+/g,"") === 'term'){
-                    args.term = args[keys[i]] 
-                }
-                break;
-        }
-    }
 
-  //case for when written in "$140,000" dollar-sign/comma format
+  //Case for human errors uppercases/whitespaces
+  const keys = Object.keys(args);
+  for (let i = 0; i < keys.length; i++) {
+      switch (i) {
+          case 0 :
+              if (keys[i].toLowerCase().replace(/\s+/g,"") === 'amount'){
+                  args.amount = args[keys[i]] 
+              }
+              break;
+          case 1 :
+              if (keys[i].toLowerCase().replace(/\s+/g,"") === 'interest'){
+                  args.interest = args[keys[i]] 
+              }
+              break;
+          case 2 :
+              if (keys[i].toLowerCase().replace(/\s+/g,"") === 'downpayment'){
+                  args.downpayment = args[keys[i]] 
+              }
+              break;
+          case 1 :
+              if (keys[i].toLowerCase().replace(/\s+/g,"") === 'term'){
+                  args.term = args[keys[i]] 
+              }
+              break;
+      }
+  }
+
+  //Case in which amount is written in dollar-sign/comma format ie. "$140,000"
   if (isNaN(args.amount)) {
     args.amount = parseFloat(args.amount.replace(/[^0-9\.]+/g, ""));
   }
@@ -56,12 +58,12 @@ function errorChecks(args) {
     args.downpayment = parseFloat(args.downpayment.replace(/[^0-9\.]+/g, ""));
   }
 
-  //case for when interest is written with a % symbol
+  //Case in which interest rate is written with a % symbol
   if (isNaN(args.interest)) {
         args.interest = parseFloat(args.interest)
   }
 
-  // throw errors for anything but a positive number
+  //Throw errors for anything but a positive number
   if (typeof args.amount === "undefined" || isNaN(parseFloat(args.amount)) || args.amount <= 0) {
     throw new Error(
       "The loan amount you entered was invalid. Please specify a positive loan amount."
@@ -94,12 +96,12 @@ function errorChecks(args) {
   };
 }
 
-//takes in an object with amount, interest, downpayment, term as keys
-
+//Takes in an object, args, with keys: amount, interest, downpayment, term
 exports.monthlyPayment = function(args) {
+  //Clean and check for human errors
   args = errorChecks(args);
 
-  // calculate monthly payment
+  //Calculate monthly payment
   let monthlyPayment = monthlyPaymentCalc(
     args.amount,
     args.interest,
@@ -107,7 +109,7 @@ exports.monthlyPayment = function(args) {
     args.term
   );
 
-  // round the payment to two decimal places
+  //Round payment to two decimal places
   monthlyPayment = Math.round(monthlyPayment * 100) / 100;
 
   return monthlyPayment;
@@ -116,7 +118,6 @@ exports.monthlyPayment = function(args) {
 exports.totalInterest = function(args) {
   args = errorChecks(args);
 
-  //calculate monthly payment
   let monthlyPayment = monthlyPaymentCalc(
     args.amount,
     args.interest,
@@ -125,25 +126,29 @@ exports.totalInterest = function(args) {
   );
 
   const termsInMonths = args.term * 12;
-  //total interest is remainded of total amount paid subtract by total amount originally owed
+
+  //Total interest is remainder of total amount paid subtracted by total amount originally owed
   let totalInterest =
     monthlyPayment * termsInMonths - (args.amount - args.downpayment);
 
   totalInterest = Math.round(totalInterest * 100) / 100;
-  // round the value to two decimal places
+
   return totalInterest;
 };
 
 exports.totalPayment = function(args) {
   args = errorChecks(args);
+
   const monthlyPayment = monthlyPaymentCalc(
     args.amount,
     args.interest,
     args.downpayment,
     args.term
   );
+
   const termsInMonths = args.term * 12;
 
+  //Total payment is monthly payment * amount of monthly terms
   let totalPayment = monthlyPayment * termsInMonths;
 
   totalPayment = Math.round(totalPayment * 100) / 100;
@@ -159,11 +164,13 @@ exports.all = function (args) {
     const totalInterest = this.totalInterest(args)
     const totalPayment = this.totalPayment(args)
 
+    //create JSON object
     const JSONobj = {
         "monthly payment":monthlyPayment,
         "total interest":totalInterest,
         "total payment":totalPayment,
     }
 
+    //return stringify of JSON object
     return console.log(JSON.stringify(JSONobj))
 }

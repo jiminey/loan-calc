@@ -61,7 +61,7 @@ exports[ "CORRECT OUTPUT WITH INTEREST RATE IN DECIMALS: A $100,000 loan , with 
   test.done();
 };
 
-//Test for interest input as a perecentage (with symbol)
+//Test for interest input as a percentage (with symbol %)
 exports[
   "CORRECT OUTPUT WITH INTEREST RATE AS A PERCENTAGE( WITH SYMBOL %): A $100,000 loan , with 0.055 interest rate, $20,000 down payment, and 30 year term should be repaid at $454.23 per month"
 ] = function(test) {
@@ -78,7 +78,7 @@ exports[
 };
 
 
-//Test for human error Upper cases
+//Test for human error uppercases
 exports[
   "CORRECT OUTPUT FOR HUMAN ERRORS UPPERCASES: amount as AmOunt"
 ] = function(test) {
