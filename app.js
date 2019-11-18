@@ -14,9 +14,9 @@ function monthlyPaymentCalc(loanAmount, interestRate,downPayment,loanTermInYears
   const monthlyTerm = loanTermInYears * 12;
 
   //calculate the monthly payment
-  //monthlyPayment = (loan amount - down payment) * ( monthlyInterest / (1 - (1 + monthlyInterest)^ -months))
+  //monthlyPayment = ((loan amount - down payment) *  monthlyInterest) / (1 - (1 + monthlyInterest)^ -months))
   return (
-    (loanAmount - downPayment) * (monthlyInterestRate /(1 - Math.pow(1 + monthlyInterestRate, -monthlyTerm)))
+    ((loanAmount - downPayment) * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -monthlyTerm))
   );
 }
  
@@ -65,11 +65,11 @@ function errorChecks(args) {
 
 //takes in an object with amount, interest, downpayment, term as keys
 
-exports.monthlyPaymentCalc = function(args) {
+exports.monthlyPayment = function(args) {
   args = errorChecks(args);
 
   // calculate monthly payment
-  const monthlyPayment = monthlyPaymentCalc(
+  let monthlyPayment = monthlyPaymentCalc(
     args.amount,
     args.interest,
     args.downpayment,
@@ -77,7 +77,7 @@ exports.monthlyPaymentCalc = function(args) {
   );
 
   // round the payment to two decimal places
-  monthlyPayment = Math.round(num * 100) / 100;
+  monthlyPayment = Math.round(monthlyPayment * 100) / 100;
 
   return monthlyPayment;
 };
@@ -86,7 +86,7 @@ exports.totalInterest = function(args) {
   args = errorChecks(args);
 
   //calculate monthly payment
-  const monthlyPayment = monthlyPaymentCalc(
+  let monthlyPayment = monthlyPaymentCalc(
     args.amount,
     args.interest,
     args.downpayment,
@@ -95,7 +95,7 @@ exports.totalInterest = function(args) {
 
   const termsInMonths = args.term * 12;
   //total interest is remainded of total amount paid subtract by total amount originally owed
-  const totalInterest =
+  let totalInterest =
     monthlyPayment * termsInMonths - (args.amount - args.downpayment);
 
   totalInterest = Math.round(totalInterest * 100) / 100;
