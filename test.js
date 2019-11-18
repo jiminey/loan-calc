@@ -94,13 +94,29 @@ exports[
   test.done();
 };
 
-//Test for human error extra white spaces
+//Test for human error extra white spaces in keys
 exports[
-  "CORRECT OUTPUT FOR HUMAN ERRORS EXTRA WHITE SPACES: amount as '   amo  unt  ' "
+  "CORRECT OUTPUT FOR HUMAN ERRORS EXTRA WHITE SPACES IN KEYS: amount as '   amo  unt  ' "
 ] = function(test) {
   test.equal(
     LoanCalc.monthlyPayment({
       '   amo  unt  ': 100000,
+      interest: "5.5%",
+      downpayment: 20000,
+      term: 30
+    }),
+    454.23
+  );
+  test.done();
+};
+
+//Test for human error extra white spaces in numbers
+exports[
+  "CORRECT OUTPUT FOR HUMAN ERRORS EXTRA WHITE SPACES IN NUMBERS: '100000' as '100 000' "
+] = function(test) {
+  test.equal(
+    LoanCalc.monthlyPayment({
+      '   amo  unt  ': "100 000",
       interest: "5.5%",
       downpayment: 20000,
       term: 30

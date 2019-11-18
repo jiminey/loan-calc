@@ -63,6 +63,7 @@ function errorChecks(args) {
         args.interest = parseFloat(args.interest)
   }
 
+
   //Throw errors for anything but a positive number
   if (typeof args.amount === "undefined" || isNaN(parseFloat(args.amount)) || args.amount <= 0) {
     throw new Error(
@@ -87,6 +88,12 @@ function errorChecks(args) {
       "The term amount you entered was invalid. Please specify a positive length for your term."
     );
   }
+
+  //Clean up white spaces in numbers
+  args.amount = args.amount.toString().replace(/\s+/g, '')
+  args.interest = args.interest.toString().replace(/\s+/g, '')
+  args.downpayment = args.downpayment.toString().replace(/\s+/g, '')
+  args.term = args.term.toString().replace(/\s+/g, '')
 
   return {
     amount: args.amount,
