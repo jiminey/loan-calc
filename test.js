@@ -111,18 +111,22 @@ exports[
 };
 
 
-//Test for correct JSON format output
+//Test for correct JSON format output; console.logs(returning consolelog outputs the result in test cases)
 exports[
   "Correct JSON format output"
 ] = function(test) {
   test.equal(
-    LoanCalc.monthlyPayment({
-      '   amo  unt  ': 100000,
+    LoanCalc.all({
+      amount: 100000,
       interest: "5.5%",
       downpayment: 20000,
       term: 30
     }),
-    454.23
+    console.log(JSON.stringify({
+      "monthly payment": 454.23,
+      "total interest": 83523.23,
+      "total payment": 163523.23
+    }))
   );
   test.done();
 };

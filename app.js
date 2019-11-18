@@ -155,14 +155,14 @@ exports.totalPayment = function(args) {
 exports.all = function (args) {
     args = errorChecks(args);
     
-    const monthlyPayment = monthlyPayment(args)
-    const totalInterest = totalInterest(args)
-    const totalPayment = totalPayment(args)
+    const monthlyPayment = this.monthlyPayment(args)
+    const totalInterest = this.totalInterest(args)
+    const totalPayment = this.totalPayment(args)
 
     const JSONobj = {
-        "monthly payment": monthlyPayment,
-        "total interest": totalInterest,
-        "total payment": totalPayment,
+        "monthly payment":monthlyPayment,
+        "total interest":totalInterest,
+        "total payment":totalPayment,
     }
 
     return console.log(JSON.stringify(JSONobj))
