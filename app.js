@@ -1,6 +1,5 @@
 'use strict'
 
-
  function monthlyPaymentCalc(loanAmount, interestRate, downPayment, loanTermInYears) {
     const monthlyInterestRate;
 
@@ -18,7 +17,6 @@
     //monthlyPayment = (loan amount - down payment) * ( monthlyInterest / (1 - (1 + monthlyInterest)^ -months))
     return (loanAmount - downPayment) * (monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -(monthlyTerm))));
 };
-
 
 function errorChecks(args) {
     //case for when written in "$140,000" dollar-sign/comma format
@@ -71,10 +69,10 @@ exports.monthlyPaymentCalc = function(args) {
 
 exports.totalInterest = function(args) {
     args = errorChecks(args);
-
+    
     //calculate monthly payment
     const monthlyPayment = monthlyPaymentCalc(args.amount, args.interest, args.downpayment, args.term);
-
+    
     const termsInMonths = args.term * 12
     //total interest is remainded of total amount paid subtract by total amount originally owed
     const totalInterest = (monthlyPayment * termsInMonths) - (args.amount - args.downpayment);
