@@ -1,7 +1,7 @@
 'use strict'
 
 
-const paymentCalc = function (loanAmount, interestRate, downPayment, loanTermInYears) {
+const monthlyPayment = function (loanAmount, interestRate, downPayment, loanTermInYears) {
     
     const monthlyInterestRate;
 
@@ -13,8 +13,9 @@ const paymentCalc = function (loanAmount, interestRate, downPayment, loanTermInY
        monthlyInterestRate = (interestRate / 100) / 12;
     }
 
+    const monthlyTerm = loanTermInYears * 12; 
 
     // calculate the monthly payment
-    // MonthlyPayment = Principal * ( MonthlyInterest / (1 - (1 + MonthlyInterest)^ -Months))
-    return loanAmt * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -(loanTerm))));
+    // monthlyPAyment = principal * ( monthlyInterest / (1 - (1 + monthlyInterest)^ -months))
+    return loanAmount * (monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -(monthlyTerm))));
 };
