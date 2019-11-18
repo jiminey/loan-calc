@@ -30,6 +30,11 @@ function errorChecks(args) {
     args.downpayment = parseFloat(args.downpayment.replace(/[^0-9\.]+/g, ""));
   }
 
+  //case for when interest is written with a % symbol
+  if (isNaN(args.interest)) {
+        args.interest = parseFloat(args.interest)
+  }
+
   // throw errors for anything but a positive number
   if (typeof args.amount === "undefined" || isNaN(parseFloat(args.amount)) || args.amount <= 0) {
     throw new Error(
