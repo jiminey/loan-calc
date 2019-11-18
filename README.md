@@ -1,13 +1,23 @@
-This loan calculator was built by Jimmy Nguyen
+# Loan Calculator 
+made by Jimmy Nguyen
 
 Check out my portfolio: jimmynguyen.dev
 
 
-cd into folder
+## How to use
 
-npm install
 
-nodeunit test.js
+**cd into folder**
+
+**npm install**
+
+Input your data in .txt file. Follow format in the file. (Note: if you use your own file, change pathway in in loancalc.js)
+
+**node loanclac.js**
+
+## Testing
+
+**nodeunit test.js**
 
 
 
