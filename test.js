@@ -1,4 +1,4 @@
-let LoanCalc = require("./loancalc.js");
+let LoanCalc = require("./calculation.js");
 
 //Test for correct monthly payment
 exports["CORRECT MONTHLY PAYMENT: A $100,000 loan , with 5.5% interest rate, $20,000 down payment, and 30 year term should be repaid at $454.23 per month"
@@ -126,7 +126,7 @@ exports[
       "monthly payment": 454.23,
       "total interest": 83523.23,
       "total payment": 163523.23
-    }))
+    },null ,4))
   );
   test.done();
 };

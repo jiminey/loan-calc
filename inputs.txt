@@ -1,0 +1,15 @@
+amount: 100000
+interest: 5.5%
+downpayment: 20000
+term: 30
+
+am  ount: $200,000
+interest: 7.5%
+downpayment: 30000
+term: 35
+
+aMount: $50,000
+interest: 0.075
+downpayment: $30,000
+term: 35
+
