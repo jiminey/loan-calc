@@ -1,0 +1,25 @@
+{
+  "name": "loancalculator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "nodeunit": "0.11.x"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiminey/loan-calc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jiminey/loan-calc/issues"
+  },
+  "homepage": "https://github.com/jiminey/loan-calc#readme"
+}
