@@ -1,13 +1,12 @@
-This project was built by Jimmy Nguyen
+This loan calculator was built by Jimmy Nguyen
 
-jimmynguyen.dev
-
-
-This is a loan calculator.
+Check out my portfolio: jimmynguyen.dev
 
 
 cd into folder
+
 npm install
+
 nodeunit test.js
 
 
