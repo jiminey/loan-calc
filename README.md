@@ -13,6 +13,7 @@ Check out my portfolio: jimmynguyen.dev
 
 Input your data in .txt file. Follow format in the file.
 
+
 (Note: if you use your own file, change pathway in loancalc.js)
 
 **node loanclac.js**
